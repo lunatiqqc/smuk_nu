@@ -6,10 +6,28 @@
     font-family: "Quicksand", sans-serif;
 }
 
+html {
+    word-break: break-word;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+header div > i:hover {
+    position: relative;
+    top: -7px;
+    transition: top 300ms;
+}
+
+i {
+    cursor: pointer;
 }
 
 a {
@@ -35,6 +53,12 @@ main {
     margin-top: -80px;
 }
 
+@media screen and (max-width: 434px) {
+    .dissapear-up {
+        margin-top: -140px;
+    }
+}
+
 .menu-list li:hover {
     transition: background-color 300ms, color 300ms;
     background-color: var(--brand-color);
@@ -50,6 +74,13 @@ main {
     .container {
         width: 100%;
         padding: 0 16px;
+    }
+}
+
+@media only screen and (max-width: 560px) {
+    .container {
+        width: 100%;
+        padding: 0 8px;
     }
 }
 
@@ -135,7 +166,9 @@ main {
 
 .customer-review {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, calc((1140px - 50px) / 2));
+    gap: 50px;
+    justify-content: center;
 }
 .customer-review article {
     display: grid;
@@ -163,7 +196,13 @@ main {
     color: var(--dark-grey);
 }
 
-#product-card {
+@media screen and (max-width: 600px) {
+    .customer-review {
+        grid-template-columns: 1fr;
+    }
+}
+
+.product-card {
     width: 250px;
     text-align: left;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -172,38 +211,50 @@ main {
     grid-template-rows: 250px 100px 1fr;
 }
 
-#product-card h1 {
+.product-card h1 {
     margin: 16px 0;
     font-size: 1rem;
 }
 
-#product-card > div:nth-of-type(1) {
+.product-card > div:nth-of-type(1) {
     padding: 0 16px;
     padding-bottom: 16px;
 }
-#product-card > div:nth-of-type(1) > div {
+.product-card > div:nth-of-type(1) > div {
     text-align: center;
     display: flex;
     flex-direction: column;
 }
 
-#product-card > div:nth-of-type(2) {
+.product-card > div:nth-of-type(2) {
     height: 40px;
     display: flex;
     align-items: flex-end;
 }
 
-#product-card button {
+@keyframes example {
+    from {
+        background-color: rgba(255, 255, 255, 0);
+    }
+    to {
+        background-color: var(--brand-color);
+    }
+}
+
+.product-card button {
+    cursor: pointer;
+    animation: example 300ms;
     width: 100%;
     background: var(--brand-color);
     color: white;
     border-radius: 4px;
     padding: 8px 0;
     font-size: 1rem;
+    transition: background-color 300ms;
 }
 
-#product-card button:hover {
-    background: black;
+.product-card button:hover {
+    background-color: black;
 }
 
 i {
@@ -246,6 +297,7 @@ figure {
 }
 img {
     width: 100%;
+    object-fit: cover;
 }
 
 svg {
@@ -292,7 +344,7 @@ header {
     position: fixed;
     top: 0;
     height: min-content;
-    width: 100%;
+    width: 100vw;
     background: white;
     z-index: 2;
 }
@@ -380,21 +432,30 @@ header #user-interface i img {
     }
 }
 
-@media screen and (max-width: 434px) {
-    .dissapear-up {
-        margin-top: -140px;
+#home > article:nth-of-type(1) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 400px;
+    background-color: var(--grey);
+}
+
+@media screen and (max-width: 600px) {
+    #home > article:nth-of-type(1) {
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr 200px;
     }
 }
 
-#home > article:nth-of-type(1) {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 1fr;
-    background-color: var(--grey);
-}
 #home > article:nth-of-type(1) h1 {
     font-size: 4.2rem;
 }
+
+@media screen and (max-width: 600px) {
+    #home > article:nth-of-type(1) h1 {
+        font-size: 2.5rem;
+    }
+}
+
 #home > article:nth-of-type(1) h2 {
     font-style: italic;
     font-weight: 600;
@@ -414,15 +475,18 @@ header #user-interface i img {
 }
 
 #home section > h1 {
-    margin: 56px 0 32px 0;
+    margin: 72px 0 56px 0;
 }
 
-#home > section:nth-of-type(1) > h1 {
+#home > section > h1 {
     text-align: center;
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 #home > section:nth-of-type(1) > div {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, calc((1140px - 50px * 3) / 3));
+    gap: 50px;
+    justify-content: center;
 }
 
 #home > section:nth-of-type(1) > div article {
@@ -433,38 +497,37 @@ header #user-interface i img {
 }
 
 #home > section:nth-of-type(1) > div article h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin: 16px;
 }
 #home > section:nth-of-type(2) {
     text-align: center;
 }
-#home > section:nth-of-type(2) > h1 {
-    font-size: 3rem;
-}
 #home > section:nth-of-type(2) > div {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+#home > section:nth-of-type(2) > div .product-card {
+    margin: 0 auto;
 }
 
 #home > section:nth-of-type(3) {
     text-align: center;
 }
-#home > section:nth-of-type(3) > h1 {
-    font-size: 3rem;
-}
 
 #home > section:nth-of-type(4) {
     display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: repeat(5, 15%);
-    justify-content: space-between;
+    grid-template-columns: repeat(auto-fill, calc((1140px - 15px * 5) / 5));
+    gap: 15px;
+    justify-content: center;
 }
 #home > section:nth-of-type(4) article {
     text-align: center;
     display: flex;
     flex-direction: column;
-
+    gap: 20px;
     align-items: center;
     font-weight: bold;
 }
@@ -477,10 +540,20 @@ header #user-interface i img {
     margin: 46px 0;
 }
 
+@media screen and (max-width: 1140px) {
+}
+
 footer {
     background-color: var(--grey);
 }
 
+footer nav ul li {
+    padding: 4px 0;
+    color: var(--brand-color);
+}
+footer nav > div > article:nth-of-type(1) div i:hover {
+    background: var(--brand-color);
+}
 footer div {
     display: flex;
     justify-content: space-between;
@@ -499,7 +572,7 @@ footer nav > article {
     font-size: 1.2rem;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 690px) {
     footer nav > article {
         min-height: 250px;
     }
@@ -516,8 +589,6 @@ footer nav > div h1 {
     font-size: 1.2rem;
 }
 
-footer nav > div > article:nth-of-type(1) div {
-}
 footer nav > div > article:nth-of-type(1) div i {
     background: white;
     border-radius: 100%;
@@ -530,6 +601,11 @@ footer nav > div > article:nth-of-type(1) div i img {
 
 footer address {
     text-align: right;
+    margin-left: auto;
+}
+
+footer address i {
+    padding: 4px 0;
 }
 
 footer nav > div > address svg {
@@ -581,6 +657,12 @@ footer nav > div button i img {
     margin-right: auto;
 }
 
+@media screen and (max-width: 768px) {
+    #shop article {
+        flex-direction: column;
+    }
+}
+
 #why-buy-from-us > article > div {
     background-color: var(--grey);
 }
@@ -588,22 +670,34 @@ footer nav > div button i img {
 #why-buy-from-us > article > h1 {
     font-size: 3rem;
     text-align: center;
+    margin: 32px 0;
 }
-#why-buy-from-us > article > section h1 {
-    font-size: 3rem;
+
+#why-buy-from-us section > h1 {
+    margin: 32px 0;
+    font-size: 2rem;
     text-align: center;
+    margin: 32px 0;
 }
+
 #why-buy-from-us > article > div {
     display: grid;
-
     grid-auto-rows: 1fr;
     grid-auto-flow: row;
 }
+
 #why-buy-from-us > article > div section {
     display: grid;
     grid-auto-columns: 1fr;
     grid-auto-rows: 1fr;
     grid-auto-flow: column;
+}
+
+@media screen and (max-width: 768px) {
+    #why-buy-from-us > article > div section {
+        grid-auto-flow: row;
+        grid-auto-rows: min-content;
+    }
 }
 
 #why-buy-from-us > article > div section div {
@@ -612,6 +706,10 @@ footer nav > div button i img {
 
 #why-buy-from-us > article > div h1 {
     font-size: 2rem;
+}
+
+#faq h1 {
+    margin: 16px 0;
 }
 
 #faq > article {
@@ -623,8 +721,10 @@ footer nav > div button i img {
     padding: 16px 0;
 }
 #faq details summary {
+    cursor: pointer;
     font-size: 1.5rem;
     font-weight: bold;
+    padding-right: 32px;
 }
 #faq details:first-of-type {
     border-top: 1px solid black;
@@ -645,11 +745,13 @@ footer nav > div button i img {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
+    gap: 30px;
 }
 #about article > div > section:nth-of-type(2) > div {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
+    gap: 30px;
 }
 #about article > div > section:nth-of-type(2) span {
     font-weight: bold;
@@ -677,9 +779,19 @@ footer nav > div button i img {
 
 #about form button {
     background: none;
-    width: 25%;
+    width: 120px;
 }
 
 #about form input#message {
     padding-bottom: 150px;
+}
+
+@media screen and (max-width: 768px) {
+    #about article > div > section:first-of-type {
+        grid-auto-flow: row;
+        gap: 30px;
+    }
+    #about article > div > section:nth-of-type(2) > div {
+        grid-auto-flow: row;
+    }
 }

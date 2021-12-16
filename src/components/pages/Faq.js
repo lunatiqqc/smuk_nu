@@ -2,6 +2,11 @@ export default function Fag() {
     function handleAccordionClick(e) {
         e.preventDefault();
 
+        if (e.target.parentNode.open == true) {
+            e.target.parentNode.open = false;
+            return;
+        }
+
         const detailsElements = document
             .querySelector("#accordion-container")
             .querySelectorAll("details");
@@ -14,10 +19,10 @@ export default function Fag() {
         }
     }
     return (
-        <main id="faq">
-            <article className="container">
+        <main id='faq'>
+            <article className='container'>
                 <h1>FAQ</h1>
-                <div id="accordion-container" onClick={handleAccordionClick}>
+                <div id='accordion-container' onClick={handleAccordionClick}>
                     <details>
                         {" "}
                         <summary>Hvorfor dannes pigmentering?</summary>

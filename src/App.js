@@ -20,18 +20,18 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route
-                    path="/"
+                    path='/'
                     element={
                         <>
-                            <Header /> <Pages />
+                            <Header /> <Pages /> <Footer />
                         </>
                     }
                 >
                     <Route index element={<Home />} />
-                    <Route path="shop" element={<Shop />} />
-                    <Route path="why-buy-from-us" element={<WhyUs />} />
-                    <Route path="faq" element={<Faq />} />
-                    <Route path="about" element={<About />} />
+                    <Route path='shop' element={<Shop />} />
+                    <Route path='why-buy-from-us' element={<WhyUs />} />
+                    <Route path='faq' element={<Faq />} />
+                    <Route path='about' element={<About />} />
                 </Route>
             </Routes>
         </BrowserRouter>

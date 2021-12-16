@@ -13,10 +13,5 @@ export default function Pages() {
         //setShowMobileMenu(false);
         window.scrollTo(0, 0);
     }, [pathname]);
-    return (
-        <div>
-            <Outlet />
-            <Footer />
-        </div>
-    );
+    return <Outlet />;
 }
