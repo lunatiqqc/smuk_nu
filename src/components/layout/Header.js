@@ -106,20 +106,22 @@ export default function Header() {
                             </i>
                         </button>
                     </div>
-
-                    <MenuList
-                        hideMobileMenu={hideMobileMenu}
-                        style={{
-                            display: showMobileMenu ? "flex" : "none",
-                            flexDirection: "column",
-                            marginLeft: "auto",
-
-                            alignItems: "flex-end",
-
-                            gap: "30px",
-                        }}
-                    />
                 </div>
+                <MenuList
+                    hideMobileMenu={hideMobileMenu}
+                    style={{
+                        display: showMobileMenu ? "flex" : "none",
+                        flexDirection: "column",
+                        marginLeft: "auto",
+
+                        alignItems: "flex-end",
+
+                        gap: "30px",
+                        borderTop: "2px solid black",
+                        borderBottom: "2px solid black",
+                        padding: "16px 0px",
+                    }}
+                />
             </nav>
         </header>
     );
