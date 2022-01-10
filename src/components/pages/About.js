@@ -3,9 +3,26 @@ import { useState } from "react";
 export default function About() {
     const [messageForm, setMessageForm] = useState({ email: "", message: "" });
     const [messageSent, setMessageSent] = useState(false);
-    function handleMessageFormSubmit(e) {
-        console.log("submit");
+    const [messageError, setMessageError] = useState(false);
+    async function handleMessageFormSubmit(e) {
+        console.log(messageForm.email, messageForm.message);
         e.preventDefault();
+        const post = await fetch("https://smuknu.webexam-mcdm.dk/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email: messageForm.email,
+                message: messageForm.message,
+            }),
+        });
+
+        if (post.ok !== true) {
+            setMessageError(
+                "En uventet fejl skete. Kontakt support eller prøv igen senere"
+            );
+            return;
+        }
+
         setMessageSent(true);
         setMessageForm({ email: "", message: "" });
     }
@@ -65,8 +82,8 @@ export default function About() {
                                     name='email'
                                     onChange={handleMessageFormChange}
                                     value={messageForm.email}
-                                    required
                                     placeholder='Email*'
+                                    required
                                 />
                                 <input
                                     type='text'
@@ -86,6 +103,9 @@ export default function About() {
                                     <button>Send Message</button>
                                     {messageSent ? (
                                         <p>Tak for din besked</p>
+                                    ) : null}
+                                    {messageError ? (
+                                        <p>{messageError}</p>
                                     ) : null}
                                 </div>
                             </form>

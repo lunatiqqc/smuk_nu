@@ -6,8 +6,21 @@ import { ReactComponent as Smiley } from "../../icons/smiley.svg";
 import { ReactComponent as DeliveryTruck } from "../../icons/delivery-truck.svg";
 import { ReactComponent as ThumbsUp } from "../../icons/thumbs-up.svg";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+    const [products, setProducts] = useState();
+
+    useEffect(async () => {
+        const data = await fetch("https://smuknu.webexam-mcdm.dk/api/products");
+
+        const json = await data.json();
+
+        console.log(json);
+
+        setProducts(json.reverse());
+    }, []);
+
     return (
         <main id='home' className='container'>
             <article>
@@ -66,35 +79,17 @@ export default function Home() {
             <section>
                 <h1>Bedst sælgende</h1>
                 <div>
-                    <Link to='/'>
-                        <ProductCard
-                            imgSource='assets/Shop/Product12-SoftLibstick.jpg'
-                            title="'Soft cream' læbestift"
-                            price='122,95'
-                        />
-                    </Link>
-                    <Link to='/'>
-                        <ProductCard
-                            imgSource='assets/Shop/Product11-Mascara.jpg'
-                            title='forlængende vandafvisende mascara'
-                            price='144,95'
-                        />
-                    </Link>
-                    <Link to='/'>
-                        <ProductCard
-                            imgSource='assets/Shop/Product10-EyeShadow.jpg'
-                            title="'Warm Tone' Øjenskygge Palette"
-                            price='237,95'
-                        />
-                    </Link>
-                    <Link to='/'>
-                        <ProductCard
-                            imgSource='assets/Shop/Product09-MultiConsealer.jpg'
-                            title='Multi-Action Concealer'
-                            price='199,95'
-                            newPrice='149,95'
-                        />
-                    </Link>
+                    {products?.map((product, i) => {
+                        return i < 4 ? (
+                            <Link key={i} to='/'>
+                                <ProductCard
+                                    imgSource={product.image}
+                                    title={product.name}
+                                    price={product.price}
+                                />
+                            </Link>
+                        ) : null;
+                    })}
                 </div>
             </section>
             <section>
