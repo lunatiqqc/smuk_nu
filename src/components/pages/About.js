@@ -5,7 +5,6 @@ export default function About() {
     const [messageSent, setMessageSent] = useState(false);
     const [messageError, setMessageError] = useState(false);
     async function handleMessageFormSubmit(e) {
-        console.log(messageForm.email, messageForm.message);
         e.preventDefault();
         const post = await fetch("https://smuknu.webexam-mcdm.dk/api/contact", {
             method: "POST",
@@ -34,9 +33,9 @@ export default function About() {
         });
     }
     return (
-        <main id='about'>
-            <article className='container'>
-                <h1 className='page-title'>Om Os</h1>
+        <main id="about">
+            <article className="container">
+                <h1 className="page-title">Om Os</h1>
                 <div>
                     <section>
                         <div>
@@ -53,8 +52,8 @@ export default function About() {
                         </div>
                         <figure>
                             <img
-                                src='/assets/AboutUs/OmOs-Profile.jpg'
-                                alt='Relaxed person'
+                                src="/assets/AboutUs/OmOs-Profile.jpg"
+                                alt="Relaxed person"
                             />
                         </figure>
                     </section>
@@ -76,23 +75,23 @@ export default function About() {
                                 Lørdag kl. 9-16
                             </p>
 
-                            <form onSubmit={handleMessageFormSubmit} action=''>
+                            <form onSubmit={handleMessageFormSubmit} action="">
                                 <input
-                                    type='email'
-                                    name='email'
+                                    type="email"
+                                    name="email"
                                     onChange={handleMessageFormChange}
                                     value={messageForm.email}
-                                    placeholder='Email*'
+                                    placeholder="Email*"
                                     required
                                 />
                                 <input
-                                    type='text'
-                                    name='message'
+                                    type="text"
+                                    name="message"
                                     onChange={handleMessageFormChange}
                                     value={messageForm.message}
-                                    id='message'
+                                    id="message"
                                     required
-                                    placeholder='Besked*'
+                                    placeholder="Besked*"
                                 />
                                 <div
                                     style={{

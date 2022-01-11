@@ -25,7 +25,7 @@ export default function ProductCard({
     return (
         <article
             style={{ cursor: onClick ? "pointer" : "" }}
-            className='product-card'
+            className="product-card"
             onClick={onClick?.bind({
                 imgSource: imgSource,
                 title: title,
@@ -37,7 +37,7 @@ export default function ProductCard({
             <figure style={{ position: "relative" }}>
                 <img src={imgSource} alt={title} />
                 {newPrice !== undefined ? (
-                    <div className='special-offer'>TILBUD</div>
+                    <div className="special-offer">TILBUD</div>
                 ) : null}
             </figure>
             <div>
@@ -45,10 +45,10 @@ export default function ProductCard({
                 <div>
                     <span className={newPrice ? "old-price" : null}>
                         {" "}
-                        {price + " "}Kr.
+                        {price + " "}
                     </span>
                     {newPrice !== undefined ? (
-                        <span className='new-price'>{newPrice + " "}Kr.</span>
+                        <span className="new-price">{newPrice + " "}</span>
                     ) : null}
                 </div>
             </div>

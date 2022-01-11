@@ -7,70 +7,69 @@ import { ReactComponent as DeliveryTruck } from "../../icons/delivery-truck.svg"
 import { ReactComponent as ThumbsUp } from "../../icons/thumbs-up.svg";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import myFetcher from "../../lib/myFetcher";
 
 export default function Home() {
     const [products, setProducts] = useState();
 
-    useEffect(async () => {
-        const data = await fetch("https://smuknu.webexam-mcdm.dk/api/products");
+    useEffect(() => {
+        (async () => {
+            const products = await myFetcher("products");
 
-        const json = await data.json();
-
-        console.log(json);
-
-        setProducts(json.reverse());
+            setProducts(products.reverse());
+        })();
     }, []);
 
     return (
-        <main id='home' className='container'>
+        <main id="home" className="container">
             <article>
                 <div>
                     <div>
                         <h1>SKØNHED FOR ALLE</h1>
                         <h2>Alt hvad du behøver... Noget du vil have.</h2>
                     </div>
-                    <Link to='/shop'>
+                    <Link to="/shop">
                         <button>Se vores top produkter</button>
                     </Link>
                 </div>
 
                 <figure>
                     <img
-                        src='assets/Index/honest.jpg'
-                        alt='skønheds produkter'
+                        src="assets/Index/honest.jpg"
+                        alt="skønheds produkter"
                     />
                 </figure>
             </article>
             <section>
                 <h1>Sæson velvære</h1>
                 <div>
-                    <Link to='/shop'>
+                    <Link to="/shop">
                         <article>
                             <h1>Hårpleje</h1>
                             <figure>
                                 <img
-                                    src='assets/Index/Cleanser.jpg'
-                                    alt='hårrenser '
+                                    src="assets/Index/Cleanser.jpg"
+                                    alt="hårrenser "
                                 />
                             </figure>
                         </article>
                     </Link>
-                    <Link to='/shop'>
+                    <Link to="/shop">
                         <article>
                             <h1>Krop og Bad</h1>
                             <figure>
                                 <img
-                                    src='assets/Index/bodyWash.jpg'
-                                    alt='kropsrenser '
+                                    src="assets/Index/bodyWash.jpg"
+                                    alt="kropsrenser "
                                 />
                             </figure>
                         </article>
                     </Link>
-                    <Link to='/shop'>
+                    <Link to="/shop">
                         <article>
                             <h1>Hudpleje</h1>
                             <figure>
-                                <img src='assets/Index/soap.jpg' alt='sæbe ' />
+                                <img src="assets/Index/soap.jpg" alt="sæbe " />
                             </figure>
                         </article>
                     </Link>
@@ -81,7 +80,7 @@ export default function Home() {
                 <div>
                     {products?.map((product, i) => {
                         return i < 4 ? (
-                            <Link key={i} to='/'>
+                            <Link key={i} to="/">
                                 <ProductCard
                                     imgSource={product.image}
                                     title={product.name}
@@ -100,7 +99,7 @@ export default function Home() {
                 <article>
                     <i>
                         <Leaf
-                            className='svg-fill'
+                            className="svg-fill"
                             style={{ transform: "scale(0.88)" }}
                         />
                     </i>
@@ -109,7 +108,7 @@ export default function Home() {
                 <article>
                     <i>
                         <Smiley
-                            className='svg-fill'
+                            className="svg-fill"
                             style={{ transform: "scale(0.85)" }}
                         />
                     </i>
@@ -120,14 +119,14 @@ export default function Home() {
                 </article>
                 <article>
                     <i>
-                        <Star className='svg-stroke' />
+                        <Star className="svg-stroke" />
                     </i>
                     <p>Godkendt af 10.000+ glade kunde</p>
                 </article>
                 <article>
                     <i>
                         <ThumbsUp
-                            className='svg-stroke'
+                            className="svg-stroke"
                             style={{ transform: "scale(0.88)" }}
                         />
                     </i>
@@ -135,7 +134,7 @@ export default function Home() {
                 </article>
                 <article>
                     <i>
-                        <DeliveryTruck className='svg-stroke' />
+                        <DeliveryTruck className="svg-stroke" />
                     </i>
                     <p>LiveTracking af din forsendelse</p>
                 </article>

@@ -1,20 +1,17 @@
 import { useEffect, useState } from "react";
+import myFetcher from "../lib/myFetcher";
 
 export default function CustomerReview() {
     const [reviews, setReviews] = useState();
 
-    useEffect(async () => {
-        const data = await fetch("https://smuknu.webexam-mcdm.dk/api/reviews");
-
-        const json = await data.json();
-
-        console.log(json);
-
-        setReviews(json);
+    useEffect(() => {
+        (async () => {
+            setReviews(await myFetcher("reviews"));
+        })();
     }, []);
     return (
         <>
-            <div className='customer-review'>
+            <div className="customer-review">
                 {reviews?.map((review, i) => {
                     return (
                         <article key={i}>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import myFetcher from "../../lib/myFetcher";
 import ProductCard from "../ProductCard";
 import ProductDetails from "../ProductDetails";
 
@@ -19,25 +20,25 @@ export default function Shop() {
         setProductDetails();
     }
 
-    useEffect(async () => {
+    useEffect(() => {
         window.addEventListener("click", handleWindowClick);
-        const data = await fetch("https://smuknu.webexam-mcdm.dk/api/products");
 
-        const json = await data.json();
-
-        console.log(json);
-
-        setProducts(json.reverse());
+        (async () => {
+            setProducts(await myFetcher("products"));
+        })();
+        return () => {
+            window.removeEventListener("click", handleWindowClick);
+        };
     }, []);
 
     return (
-        <main id='shop'>
+        <main id="shop">
             {productDetails ? (
                 <ProductDetails
                     imgSource={productDetails.imgSource}
                     title={productDetails.title}
                     price={productDetails.price}
-                    description='All Purpose reparerende balsam er specielt udviklet til tørt 
+                    description="All Purpose reparerende balsam er specielt udviklet til tørt 
                     og slidt hår. <br />
                     Balsammen indeholder cement-ceramid, som efterligner hårets 
                     egen cement og virker målrettet på de skadede områder for at 
@@ -45,25 +46,26 @@ export default function Shop() {
                     <br /> <br />
                     Håret genfinder sin smidighed og styrke. 
                     Håroverfladen bliver glat og glansfuld, og færre hårstrå knækker 
-                    af.'
+                    af."
                 />
             ) : null}{" "}
-            <article className='container'>
-                <h1 className='page-title'>Butik</h1>
+            <article className="container">
+                <h1 className="page-title">Butik</h1>
                 <div>
                     {products?.map((product, i) => {
                         if (i === 0) {
                             return (
                                 <ProductCard
+                                    key={i}
                                     onClick={handleProductCardClick}
-                                    imgSource='/assets/Shop/Product01-Balm.jpg'
-                                    title='All Purpose Balm'
-                                    price='134,95'
+                                    imgSource={product.image}
+                                    title={product.name}
+                                    price={product.price}
                                 />
                             );
                         } else {
                             return (
-                                <Link to='/shop'>
+                                <Link key={i} to="/shop">
                                     <ProductCard
                                         imgSource={product.image}
                                         title={product.name}

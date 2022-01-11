@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
+import myFetcher from "../../lib/myFetcher";
 
 export default function Fag() {
     const [faq, setFaq] = useState();
 
-    useEffect(async () => {
-        const data = await fetch("https://smuknu.webexam-mcdm.dk/api/faq");
-
-        const json = await data.json();
-
-        console.log(json);
-
-        setFaq(json);
+    useEffect(() => {
+        (async () => {
+            setFaq(await myFetcher("faq"));
+        })();
     }, []);
     function handleAccordionClick(e) {
         e.preventDefault();
@@ -32,13 +29,13 @@ export default function Fag() {
         }
     }
     return (
-        <main id='faq'>
-            <article className='container'>
-                <h1 className='page-title'>FAQ</h1>
-                <div id='accordion-container' onClick={handleAccordionClick}>
-                    {faq?.map((faq) => {
+        <main id="faq">
+            <article className="container">
+                <h1 className="page-title">FAQ</h1>
+                <div id="accordion-container" onClick={handleAccordionClick}>
+                    {faq?.map((faq, i) => {
                         return (
-                            <details>
+                            <details key={i}>
                                 <summary>{faq.question}</summary>
                                 {faq.answer}
                             </details>
