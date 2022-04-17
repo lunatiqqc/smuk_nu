@@ -1,3 +1,10 @@
+A school assignment of hitting a design perfectly with HTML/CSS
+
+How to run it can be found below.
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
